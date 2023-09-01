@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Django blog{% endblock %}
+
+
+{% block css_file %}
+
+{% endblock %}
+
+{% block content %}
+<header id="main-navigation">
+    <h1><a href="#">Blog Pauliny</a></h1>
+    <nav>
+        <a href="#">All Posts</a>
+    </nav>
+</header>
+
+
+<section id="welcome">
+    <header>
+        <img src="" alt="Paulina">
+        <h2>PAULINA's BLOG</h2>
+    </header>
+    <p>Hello, I am Paulina and this is blog about cats!</p>
+
+</section>
+
+<section id="latest-posts">
+    <h2>My last post about cats:</h2>
+    <ul>
+        <li>
+            <article class="post">
+                <a href="">
+                    <img src="" alt="Cats behaviors">
+                    <div class="post__content">
+                        <h3>Cats behaviors</h3>
+                        <p>Cats love to eat raw meat.</p>
+                    </div>
+                </a>
+            </article>
+        </li>
+    </ul>
+</section>
+
+<section id="about">
+    <h2>My work</h2>
+    <p>I love to write Python programs.</p>
+    <p>My goal is to keep growing as a Python developer.</p>
+</section>
+{% endblock %}
