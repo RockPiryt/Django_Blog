@@ -2,11 +2,11 @@ from django.shortcuts import render
 
 # Create your views here.
 
-def index(request):
-    render(request, "blog/index.html")
+def starting_page(request):
+    return render(request, "blog/index.html")
 
 def posts(request):
-    pass
+    return render(request, "blog/all-posts.html")
 
 def single_post(request):
     pass
