@@ -13,12 +13,10 @@
 <section id="all-posts">
     <h2>Post below:</h2>
     <ul>
-        {% include "blog/includes/post.html" %}
-        {% include "blog/includes/post.html" %}
-        {% include "blog/includes/post.html" %}
-        {% include "blog/includes/post.html" %}
-        {% include "blog/includes/post.html" %}
-        {% include "blog/includes/post.html" %}
+        {% for sssingle_post in html_all_posts %}
+            {% include "blog/includes/post.html" %}
+        {% endfor %}
+        
     </ul>
 </section>
 {% endblock %}
