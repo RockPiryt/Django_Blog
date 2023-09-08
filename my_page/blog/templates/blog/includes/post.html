@@ -2,8 +2,8 @@
 
 <li>
     <article class="post">
-        <a href="{% url 'single-post-page' slug=sssingle_post.slug %}">
-            <img src="{% static 'blog/images/'|add:sssingle_post.image %}" alt="{{ sssingle_post.title}}" width='900px'>
+        <a href="{% url 'single-post-page' aslug=sssingle_post.slug %}">
+            <img src="{% static 'blog/images/'|add:sssingle_post.image_name %}" alt="{{ sssingle_post.title}}" width='900px'>
             <div class="post__content">
                 <h3>{{ sssingle_post.title}}</h3>
                 <p>{{ sssingle_post.excerpt}}</p>
