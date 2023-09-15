@@ -9,6 +9,15 @@
 {% endblock %}
 
 {% block content %}
+
+    {% if html_comment_form.errors %}
+        <div id="alert">
+            <h2>Saving the comment failed!</h2>
+            <p>Please check the comment form below the post and fix your errors.</p>
+            <a href="#comment-form">Fix!</a>
+        </div>
+    {% endif %}
+
     <section id="summary">
         <h2>{{ html_post.title }}</h2>
         <div>
@@ -17,7 +26,7 @@
             {% endfor %}
         </div>
         <article>
-            <img src="{% static 'blog/images/'|add:html_post.image_name %}" alt="{{ html_post.title }}">
+            <img src="{{ html_post.pimage.url }}" alt="{{ html_post.title }}">
             <address>By <a href="mailto:{{ html_post.author.email }}">{{ html_post.author|title }}</a></address>
             <div>
                 Last updated on <time>{{ html_post.date|date:"d M Y" }}</time>
@@ -28,4 +37,31 @@
     <main>
         {{ html_post.content|linebreaks}}
     </main>
+
+    <section id="comments">
+        <ul>
+            {% for single_comment in html_comments %}
+                <li>
+                    <h2>{{ single_comment.user_name }}</h2>
+                    <p>{{ single_comment.text|linebreaks }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+
+
+    <section id="comment-form">
+        <h2>Your Comment</h2>
+        <form action="{% url 'single-post-page' aslug=html_post.slug %}" method="POST">
+            {% csrf_token %}
+            {% for form_field in html_comment_form %}
+                <div class="form-control {% if form_field.errors %} invalid {% endif %}">
+                    {{ form_field.label_tag }}
+                    {{ form_field }}
+                    {{ form_field.errors }}
+                </div>
+            {% endfor %}
+            <button> Save Comment</button>
+        </form>
+    </section>
 {% endblock %}

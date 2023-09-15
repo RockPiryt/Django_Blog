@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Django blog{% endblock %}
+
+
+{% block css_file %}
+<link rel="stylesheet" href="{% static 'blog/post.css'%}">
+<link rel="stylesheet" href="{% static 'blog/index.css'%}">
+{% endblock %}
+
+{% block content %}
+
+<section id="welcome">
+    <header>
+        <img src="{% static 'blog/images/profile.jpg' %}" alt="Paulina">
+        <h2>PAULINA's BLOG</h2>
+    </header>
+    <p>Hello, I am Paulina and this is blog about cats!</p>
+
+</section>
+
+<section id="latest-posts">
+    <h2>My last post about cats:</h2>
+    <ul>
+        {% for sssingle_post in html_posts %}
+            {% include "blog/includes/post.html" %}
+        {% endfor %}
+    </ul>
+</section>
+
+<section id="about">
+    <h2>My work</h2>
+    <p>I love to write Python programs.</p>
+    <p>My goal is to keep growing as a Python developer.</p>
+</section>
+{% endblock %}
