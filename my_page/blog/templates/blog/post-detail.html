@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-
+    <!-- Error to fix message -->
     {% if html_comment_form.errors %}
         <div id="alert">
             <h2>Saving the comment failed!</h2>
@@ -17,14 +17,33 @@
             <a href="#comment-form">Fix!</a>
         </div>
     {% endif %}
+    <!-- End error section -->
 
+    <!-- Post title info -->
     <section id="summary">
         <h2>{{ html_post.title }}</h2>
+        <!-- tags -->
         <div>
             {% for one_tag in html_tags_for_post %}
                 <span class="tag">{{one_tag.caption}}</span>
             {% endfor %}
         </div>
+        <!-- End tags -->
+        <!-- Read later -->
+        <form action="{% url 'rr-read-later' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="rrpost_id" value="{{ html_post.id }}">
+            <div id="read-later">
+                <button>
+                    {% if html_is_saved_later %}
+                        Remove from "Read Later" list
+                    {% else %}
+                        Read Later
+                    {% endif %}
+                </button>
+            </div>
+        </form>
+        <!-- End Read later -->
         <article>
             <img src="{{ html_post.pimage.url }}" alt="{{ html_post.title }}">
             <address>By <a href="mailto:{{ html_post.author.email }}">{{ html_post.author|title }}</a></address>
@@ -33,11 +52,13 @@
             </div>
         </article>
     </section>
-
+    <!-- End Post title info  -->
+    <!-- Post text -->
     <main>
         {{ html_post.content|linebreaks}}
     </main>
-
+    <!-- End Post text -->
+    <!-- Comments from database -->
     <section id="comments">
         <ul>
             {% for single_comment in html_comments %}
@@ -48,8 +69,9 @@
             {% endfor %}
         </ul>
     </section>
+    <!-- End Comments from database -->
 
-
+    <!-- Create a new Comment via Form -->
     <section id="comment-form">
         <h2>Your Comment</h2>
         <form action="{% url 'single-post-page' aslug=html_post.slug %}" method="POST">
@@ -64,4 +86,5 @@
             <button> Save Comment</button>
         </form>
     </section>
+    <!-- End form to create a comment -->
 {% endblock %}
